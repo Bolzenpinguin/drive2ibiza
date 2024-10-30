@@ -5,19 +5,24 @@ Car Sharing and Organizing App.
 ## Project Structure
 
 ```
-lib/
-├── main.dart                   // Entry point of the app
-├── app.dart                    // Main app widget configuration
-├── config/                     // App-wide configurations
-├── models/                     // Data models
-├── pages/                      // Separate pages for each screen
-│   ├── calendar_page.dart
-│   ├── map_page.dart
-│   ├── settings_page.dart
-│   └── home.dart               
-├── widgets/                    // Reusable UI components
-├── services/                   // Services (API, location, authentication)
-└── utils/                      // Utility functions or constants
+drive2ibiza/
+├──assets/
+│   ├── icon/
+│   └── img/
+├── lib/
+│    ├── main.dart                   // Entry point of the app
+│    ├── app.dart                    // Main app widget configuration
+│    ├── config/                     // App-wide configurations
+│    ├── models/                     // Data models
+│    ├── pages/                      // Separate pages for each screen
+│    │   ├── calendar_page.dart
+│    │   ├── map_page.dart
+│    │   ├── settings_page.dart
+│    │   └── home.dart               
+│    ├── widgets/                    // Reusable UI components
+│    ├── services/                   // Services (API, location, authentication)
+│    └── utils/                      // Utility functions or constants
+└── pubspec.yaml                    
 ```
 ## Explanation of Each File/Folder
 	•	main.dart: The entry point of the application. It initializes the app by calling runApp and setting up the main app widget.
