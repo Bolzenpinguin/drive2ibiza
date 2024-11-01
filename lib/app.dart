@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'pages/home.dart';
-import 'utils/colors.dart';
+import 'pages/login_page.dart';
+import 'utils/styleguide.dart';
+
+// Placeholder for login
+bool login = false;
 
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
@@ -9,7 +13,7 @@ class NavigationBarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromRGBO(242, 242, 247, 100), // Background Color main Content
+        scaffoldBackgroundColor: appBackgroundColor, // Background Color main Content
 
         appBarTheme: const AppBarTheme(
           backgroundColor: appNavBarColor, // Down Nav bar background
@@ -39,7 +43,9 @@ class NavigationBarApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const Home(),
+
+      home: login ? const Home() : const Login(), //home is from dart
+
     );
   }
 }
