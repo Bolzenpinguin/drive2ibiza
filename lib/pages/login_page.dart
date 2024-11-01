@@ -3,8 +3,6 @@ import 'package:drive2ibiza/utils/styleguide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-//TODO: Farben und Fonts
-
 class Login extends StatelessWidget {
   const Login({super.key});
 
@@ -13,7 +11,7 @@ class Login extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: paddingBig),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
             children: [

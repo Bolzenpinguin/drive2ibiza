@@ -35,6 +35,7 @@ const double secondaryHeading = 18.0;
 const double borderRadiusSmall = 10.0;
 
 
-// Pading
+// Padding
 const double paddingSmall = 10.0;
 const double paddingNormal = 15.0;
+const double paddingBig = 20.0;
