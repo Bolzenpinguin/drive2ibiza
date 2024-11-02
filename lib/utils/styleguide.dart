@@ -11,13 +11,16 @@ const Color appNavBarColor = Color.fromRGBO(255, 255, 255, 1); // smooth withe
 const Color appSelectedIconColor = Color.fromRGBO(0, 122, 255 , 1); // blue
 const Color appUnselectedIconColor = Color.fromRGBO(128, 128, 128, 0.55); // light grey
 
-// Labels
-const Color normalLabel = Color.fromRGBO(0, 0, 0, 1);
-const Color highlightLabel = Color.fromRGBO(0, 122, 255, 1);
+// Font Colors
+const Color fontColor = Color.fromRGBO(0, 0, 0, 1);
+const Color linkFontColor = Color.fromRGBO(0, 122, 255, 1);
 
 // Backgrounds
 const Color appBackgroundColor = Color.fromRGBO(242, 242, 247, 1); // background grey
 
+// BTN Styling
+const Color btnBackgroundColor = Color.fromRGBO(0, 122, 255, 1);
+const Color btnFontColor = Color.fromRGBO(255, 255, 255, 1);
 
 // Spacing
 const double spacingSmall = 10.0;
@@ -29,7 +32,6 @@ const double spacingXL = 50.0;
 // Fonts
 const double primaryHeading = 28.0;
 const double secondaryHeading = 18.0;
-
 
 // Border Radius
 const double borderRadiusSmall = 10.0;

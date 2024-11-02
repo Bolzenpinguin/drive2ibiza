@@ -18,7 +18,7 @@ class NavigationBarApp extends StatelessWidget {
 
         appBarTheme: const AppBarTheme(
           backgroundColor: appNavBarColor, // Down Nav bar background
-          foregroundColor: normalLabel, // Text Color
+          foregroundColor: fontColor, // Text Color
         ),
 
         navigationBarTheme: NavigationBarThemeData(

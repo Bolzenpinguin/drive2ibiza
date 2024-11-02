@@ -208,6 +208,8 @@ class LoginBTN extends StatelessWidget {
         },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: paddingNormal),
+          foregroundColor: btnFontColor,
+          backgroundColor: btnBackgroundColor,
         ),
         child: const Text('Login'),
       ),
