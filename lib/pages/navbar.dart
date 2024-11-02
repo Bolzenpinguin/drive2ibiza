@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'calendar_page.dart';
-import 'map_page.dart';
-import 'settings_page.dart';
+import 'calendar/calendar.dart';
+import 'map/map.dart';
+import 'settings/settings.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class NavBar extends StatefulWidget {
+  const NavBar({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<NavBar> createState() => _NavBarState();
 }
 
-class _HomeState extends State<Home> {
+class _NavBarState extends State<NavBar> {
   int currentPageIndex = 0;
 
   final List<Widget> pages = [

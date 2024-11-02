@@ -1,6 +1,7 @@
+import 'package:drive2ibiza/pages/map/map.dart';
 import 'package:flutter/material.dart';
-import 'pages/home.dart';
-import 'pages/login_page.dart';
+import 'pages/navbar.dart';
+import 'pages/login/login.dart';
 import 'utils/styleguide.dart';
 
 // Placeholder for login
@@ -44,7 +45,7 @@ class NavigationBarApp extends StatelessWidget {
         ),
       ),
 
-      home: login ? const Home() : const Login(), //home is from dart
+      home: login ? const MapPage() : const Login(), //home is from dart
 
     );
   }

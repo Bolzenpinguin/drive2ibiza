@@ -1,4 +1,4 @@
-import 'package:drive2ibiza/pages/calendar_page.dart';
+import 'package:drive2ibiza/pages/calendar/calendar.dart';
 import 'package:drive2ibiza/utils/styleguide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
