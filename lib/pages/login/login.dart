@@ -3,6 +3,8 @@ import 'package:drive2ibiza/utils/styleguide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../navigation.dart';
+
 class Login extends StatelessWidget {
   const Login({super.key});
 
@@ -201,7 +203,7 @@ class LoginBTN extends StatelessWidget {
           //TODO: Login Funktion -> leitet zu Kalender Page weiter
           Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const CalendarPage()),
+              MaterialPageRoute(builder: (context) => const Navigation(currentIndex: 0,)),
           );
         },
         style: ElevatedButton.styleFrom(

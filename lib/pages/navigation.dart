@@ -3,21 +3,32 @@ import 'calendar/calendar.dart';
 import 'map/map.dart';
 import 'settings/settings.dart';
 
-class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+class Navigation extends StatefulWidget {
+  final int currentIndex;
+
+  const Navigation({
+    required this.currentIndex,
+    super.key,
+  });
 
   @override
-  State<NavBar> createState() => _NavBarState();
+  State<Navigation> createState() => _NavigationState();
 }
 
-class _NavBarState extends State<NavBar> {
-  int currentPageIndex = 0;
+class _NavigationState extends State<Navigation> {
+  late int currentPageIndex;
+  late final List<Widget> pages;
 
-  final List<Widget> pages = [
-    const CalendarPage(),
-    const MapPage(),
-    const SettingsPage(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    currentPageIndex = widget.currentIndex;
+    pages = [
+      const CalendarPage(),
+      const MapPage(),
+      const SettingsPage(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {

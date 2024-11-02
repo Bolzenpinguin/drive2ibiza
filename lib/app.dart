@@ -1,6 +1,6 @@
 import 'package:drive2ibiza/pages/map/map.dart';
 import 'package:flutter/material.dart';
-import 'pages/navbar.dart';
+import 'pages/navigation.dart';
 import 'pages/login/login.dart';
 import 'utils/styleguide.dart';
 
@@ -45,7 +45,8 @@ class NavigationBarApp extends StatelessWidget {
         ),
       ),
 
-      home: login ? const MapPage() : const Login(), //home is from dart
+      // 0 is calendar page
+      home: login ? const Navigation(currentIndex: 0,) : const Login(),
 
     );
   }

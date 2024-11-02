@@ -1,5 +1,3 @@
-// TODO Implement this library.
-
 import 'package:flutter/material.dart';
 
 class CalendarPage extends StatelessWidget {
@@ -9,7 +7,7 @@ class CalendarPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calender'),
+        title: const Text('Calendar'),
       ),
       body: const Center(
         child: Text('Calender Page'),
