@@ -1,4 +1,3 @@
-import 'package:drive2ibiza/pages/map/map.dart';
 import 'package:flutter/material.dart';
 import 'pages/navigation.dart';
 import 'pages/login/login.dart';

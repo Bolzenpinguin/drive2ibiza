@@ -24,7 +24,7 @@ class _NavigationState extends State<Navigation> {
     super.initState();
     currentPageIndex = widget.currentIndex;
     pages = [
-      const CalendarPage(),
+      const Calendar(),
       const MapPage(),
       const SettingsPage(),
     ];

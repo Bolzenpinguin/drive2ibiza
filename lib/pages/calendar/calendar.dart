@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
+import '../../utils/styleguide.dart';
+import '../../pages/calendar/calendar_widget.dart';
 
-class CalendarPage extends StatelessWidget {
-  const CalendarPage({super.key});
+class Calendar extends StatefulWidget {
+  const Calendar({super.key});
 
+  @override
+  _CalendarState createState() => _CalendarState();
+}
+
+class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Calendar'),
+        title: Text(
+          'Drive2Ibiza (TBA)',
+          style: TextStyle(color: fontColor),
+        ),
+        centerTitle: true,
+        backgroundColor: appNavBarColor,
       ),
-      body: const Center(
-        child: Text('Calender Page'),
-      ),
+      body: CalendarWidget(),
     );
   }
 }

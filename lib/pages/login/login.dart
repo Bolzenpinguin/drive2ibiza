@@ -1,8 +1,6 @@
-import 'package:drive2ibiza/pages/calendar/calendar.dart';
 import 'package:drive2ibiza/utils/styleguide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../navigation.dart';
 
 class Login extends StatelessWidget {
@@ -126,7 +124,7 @@ class EmailField extends StatelessWidget {
         labelText: 'Email',
         hintText: 'Enter your Email',
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadiusSmall),
+          borderRadius: BorderRadius.circular(borderRadiusMedium),
         ),
       ),
     );
@@ -162,7 +160,7 @@ class PasswordFieldState extends State<PasswordField> {
           onPressed: togglePasswordVisibility,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadiusSmall),
+          borderRadius: BorderRadius.circular(borderRadiusMedium),
         ),
       ),
     );
