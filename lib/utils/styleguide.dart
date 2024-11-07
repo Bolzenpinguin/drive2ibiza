@@ -14,16 +14,16 @@ const Color appUnselectedIconColor = Color.fromRGBO(128, 128, 128, 0.55); // lig
 // Font Colors
 const Color fontColor = Color.fromRGBO(0, 0, 0, 1);
 const Color linkFontColor = Color.fromRGBO(0, 122, 255, 1);
+const Color secondaryFontColor = Color.fromRGBO(128, 128, 128, 0.55);
 
 // Backgrounds
 const Color appBackgroundColor = Color.fromRGBO(242, 242, 247, 1); // background grey
+const Color whiteBackground = Color.fromRGBO(255, 255, 255, 1);
 
 // BTN Styling
 const Color btnBackgroundColor = Color.fromRGBO(0, 122, 255, 1);
 const Color btnFontColor = Color.fromRGBO(255, 255, 255, 1);
-
-// calendar
-const Color calendarBackground = Color.fromRGBO(255, 255, 255, 1); // smooth withe
+const Color btnGreyBackground = Color.fromRGBO(120, 120, 128, 0.12);
 
 // Shadows
 const Color shadowColor = Colors.black12;
@@ -38,9 +38,10 @@ const double spacingXL = 50.0;
 // Fonts
 const double primaryHeading = 28.0;
 const double secondaryHeading = 18.0;
+const double copyrightLabel = 12.0;
 
 // Border Radius
-const double borderRadiusSmall = 5.0;
+const double borderRadiusSmall = 6.0;
 const double borderRadiusMedium = 10.0;
 
 // Padding
@@ -52,3 +53,6 @@ const double paddingBig = 20.0;
 const double marginSmall = 10.0;
 const double marginNormal = 15.0;
 const double marginBig = 20.0;
+
+// Textbox
+const double settingsBoxWidth = 120.0;

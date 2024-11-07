@@ -26,7 +26,7 @@ class _NavigationState extends State<Navigation> {
     pages = [
       const Calendar(),
       const MapPage(),
-      const SettingsPage(),
+      const Settings(),
     ];
   }
 

@@ -12,7 +12,7 @@ class CalendarWidget extends StatelessWidget {
       padding: const EdgeInsets.all(paddingSmall),
       margin: const EdgeInsets.all(marginSmall),
       decoration: BoxDecoration(
-        color: calendarBackground,
+        color: whiteBackground,
         borderRadius: BorderRadius.circular(borderRadiusMedium),
         boxShadow: [
           BoxShadow(
@@ -24,7 +24,7 @@ class CalendarWidget extends StatelessWidget {
 
       child: SfCalendar(
         headerStyle: CalendarHeaderStyle(
-            backgroundColor: calendarBackground,
+            backgroundColor: whiteBackground,
             textStyle: TextStyle(
               fontWeight: FontWeight.bold,
             )

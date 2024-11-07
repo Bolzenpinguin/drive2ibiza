@@ -1,18 +1,22 @@
-// TODO Implement this library.
 import 'package:flutter/material.dart';
+import 'package:drive2ibiza/pages/settings/settings_widget.dart';
+import '../../utils/styleguide.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class Settings extends StatelessWidget {
+  const Settings({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(
+          'Settings',
+          style: TextStyle(color: fontColor),
+        ),
+        centerTitle: true,
+        backgroundColor: appNavBarColor,
       ),
-      body: const Center(
-        child: Text('Settings Page'),
-      ),
+      body: SettingsWidget(),
     );
   }
 }
