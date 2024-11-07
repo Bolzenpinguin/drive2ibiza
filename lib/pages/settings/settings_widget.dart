@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../../utils/styleguide.dart';
 import 'package:intl/intl.dart';
 
+import 'group_settings.dart';
+
 class SettingsWidget extends StatelessWidget {
   const SettingsWidget({super.key});
 
@@ -52,6 +54,12 @@ class SettingsWidget extends StatelessWidget {
                             onTap: () {
                               // TODO: BTN für Namensänderung implementieren
                               print('Button for Name Change Pressed!');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const GroupSettings(),
+                                ),
+                              );
                             },
                             child: Text(
                               'Kurt',
