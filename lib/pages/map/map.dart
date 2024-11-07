@@ -1,18 +1,20 @@
-// TODO Implement this library.
-import 'package:flutter/material.dart';
+  import 'package:flutter/material.dart';
+  import 'package:drive2ibiza/utils/styleguide.dart';
+  import 'package:flutter_map/flutter_map.dart';
+  import 'package:latlong2/latlong.dart';
 
-class MapPage extends StatelessWidget {
-  const MapPage({super.key});
+import 'map_widget.dart';
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Map'),
-      ),
-      body: const Center(
-        child: Text('Map Page'),
-      ),
-    );
+  class MapPage extends StatelessWidget {
+    const MapPage({super.key});
+
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Map'),
+        ),
+        body: MapWidget(),
+      );
+    }
   }
-}
