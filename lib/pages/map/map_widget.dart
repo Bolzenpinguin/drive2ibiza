@@ -96,15 +96,26 @@ class _MapWidgetState extends State<MapWidget> {
             child: FloatingActionButton(
               onPressed: resetView,
               backgroundColor: Colors.white,
+              mini: true,
               child:
                   SvgPicture.asset(
                     'assets/icon/topCar.svg',
                     fit: BoxFit.contain,
+                    colorFilter: ColorFilter.mode(appPrimaryColor, BlendMode.srcIn),
                   ),
             ),
           ),
 
-
+          Positioned(
+            top: 60.0,
+            right: 10.0,
+            child: FloatingActionButton(
+              onPressed: getCurrentLocation,
+                backgroundColor: Colors.white,
+                mini: true,
+                child: Icon(Icons.gps_fixed, color: appPrimaryColor,),
+            )
+          )
         ],
       ),
     );
@@ -113,4 +124,9 @@ class _MapWidgetState extends State<MapWidget> {
   void resetView() {
     mapController.move(lastPostion, 17.5);
   }
+}
+
+void getCurrentLocation() {
+  // TODO: Geopostion bekommen
+  print('BTN for Geolocation pressed');
 }
