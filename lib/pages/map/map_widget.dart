@@ -12,8 +12,9 @@ class MapWidget extends StatefulWidget {
 }
 
 class _MapWidgetState extends State<MapWidget> {
-  final MapController _mapController = MapController();
-  final LatLng _initialPosition = LatLng(51.050407, 13.737262);
+  final MapController mapController = MapController();
+  // TODO noch postion laden
+  final LatLng lastPostion = LatLng(51.050407, 13.737262);
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +30,15 @@ class _MapWidgetState extends State<MapWidget> {
           ),
         ],
       ),
+
       child: Stack(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
             child: FlutterMap(
-              mapController: _mapController,
+              mapController: mapController,
               options: MapOptions(
-                initialCenter: _initialPosition,
+                initialCenter: lastPostion,
                 initialZoom: 17.5,
               ),
               children: [
@@ -46,7 +48,7 @@ class _MapWidgetState extends State<MapWidget> {
                 MarkerLayer(
                   markers: [
                     Marker(
-                      point: _initialPosition,
+                      point: lastPostion,
                       width: 80.0,
                       height: 80.0,
                       child: Column(
@@ -86,12 +88,13 @@ class _MapWidgetState extends State<MapWidget> {
               ],
             ),
           ),
+
           // Reset View Button
           Positioned(
             top: 10.0,
             right: 10.0,
             child: FloatingActionButton(
-              onPressed: _resetView,
+              onPressed: resetView,
               backgroundColor: Colors.white,
               child:
                   SvgPicture.asset(
@@ -100,12 +103,14 @@ class _MapWidgetState extends State<MapWidget> {
                   ),
             ),
           ),
+
+
         ],
       ),
     );
   }
 
-  void _resetView() {
-    _mapController.move(_initialPosition, 17.5);
+  void resetView() {
+    mapController.move(lastPostion, 17.5);
   }
 }
