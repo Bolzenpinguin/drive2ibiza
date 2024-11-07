@@ -59,15 +59,14 @@ class _MapWidgetState extends State<MapWidget> {
                             width: 50.0,
                             height: 50.0,
                             decoration: BoxDecoration(
-                              color: Colors.green,
+                              color: Colors.red,
                               shape: BoxShape.circle,
                             ),
                             child: Center(
-                              child: Image.asset(
-                                'assets/icon/car.png',
-                                width: 30.0,
-                                height: 30.0,
+                              child: SvgPicture.asset(
+                                'assets/icon/car.svg',
                                 fit: BoxFit.contain,
+                                colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
                               ),
                             ),
                           ),
@@ -76,7 +75,7 @@ class _MapWidgetState extends State<MapWidget> {
                             width: 10.0,
                             height: 10.0,
                             decoration: BoxDecoration(
-                              color: Colors.green,
+                              color: Colors.red,
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -113,7 +112,8 @@ class _MapWidgetState extends State<MapWidget> {
               onPressed: getCurrentLocation,
                 backgroundColor: Colors.white,
                 mini: true,
-                child: Icon(Icons.gps_fixed, color: appPrimaryColor,),
+                child:
+                  Icon(Icons.gps_fixed, color: appPrimaryColor,),
             )
           )
         ],
