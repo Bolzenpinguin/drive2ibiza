@@ -18,6 +18,9 @@ class GroupSettings extends StatelessWidget {
               'To join a group, just enter the keyword',
               style: TextStyle(fontSize: 16, color: appUnselectedIconColor),
             ),
+
+            const SizedBox(height: 10),
+
             TextField(
               decoration: InputDecoration(
                 hintText: 'Keyword',
@@ -33,6 +36,7 @@ class GroupSettings extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // TODO: Join Group Logik entwickeln
+                print('Join Group BTN pressed');
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: paddingNormal, horizontal: paddingSmall),
@@ -50,12 +54,17 @@ class GroupSettings extends StatelessWidget {
 
             Text(
               'Create a group and invite people',
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16, color: appUnselectedIconColor),
             ),
+
+            const SizedBox(height: 10),
+
             TextField(
               decoration: InputDecoration(
                 hintText: 'Group Name',
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.red)
+                ),
               ),
             ),
 
@@ -64,6 +73,7 @@ class GroupSettings extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // TODO: Create Group Logik entwickeln
+                print('Create Group BTN pressed');
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: paddingNormal, horizontal: paddingSmall),
