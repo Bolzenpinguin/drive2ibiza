@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:drive2ibiza/utils/styleguide.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:http/http.dart' as http;
 
 class MapWidget extends StatefulWidget {
   const MapWidget({super.key});
@@ -13,8 +15,14 @@ class MapWidget extends StatefulWidget {
 
 class _MapWidgetState extends State<MapWidget> {
   final MapController mapController = MapController();
-  // TODO noch postion laden
   final LatLng lastPostion = LatLng(51.050407, 13.737262);
+  LatLng? markerPosition;
+
+  @override
+  void initState() {
+    super.initState();
+    markerPosition = lastPostion; // Initially set marker at the lastPosition
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +47,12 @@ class _MapWidgetState extends State<MapWidget> {
               options: MapOptions(
                 initialCenter: lastPostion,
                 initialZoom: 17.5,
+                onTap: (tapPosition, point) {
+                  // Update marker position to where the map was tapped
+                  setState(() {
+                    markerPosition = point;
+                  });
+                },
               ),
               children: [
                 TileLayer(
@@ -46,39 +60,40 @@ class _MapWidgetState extends State<MapWidget> {
                 ),
                 MarkerLayer(
                   markers: [
-                    Marker(
-                      point: lastPostion,
-                      width: 80.0,
-                      height: 200.0,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            width: 50.0,
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Center(
-                              child: SvgPicture.asset(
-                                'assets/icon/car.svg',
-                                fit: BoxFit.contain,
-                                colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                    if (markerPosition != null)
+                      Marker(
+                        point: markerPosition!,
+                        width: 80.0,
+                        height: 200.0,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 50.0,
+                              height: 50.0,
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: SvgPicture.asset(
+                                  'assets/icon/car.svg',
+                                  fit: BoxFit.contain,
+                                  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                                ),
                               ),
                             ),
-                          ),
-                          Container(
-                            width: 10.0,
-                            height: 10.0,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              shape: BoxShape.circle,
+                            Container(
+                              width: 10.0,
+                              height: 10.0,
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                shape: BoxShape.circle,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ],
@@ -89,6 +104,10 @@ class _MapWidgetState extends State<MapWidget> {
             right: 10.0,
             child: FloatingActionButton(
               onPressed: () {
+                // Reset marker and map to the lastPosition
+                setState(() {
+                  markerPosition = lastPostion;
+                });
                 mapController.move(lastPostion, 17.5);
               },
               backgroundColor: Colors.white,
@@ -105,7 +124,6 @@ class _MapWidgetState extends State<MapWidget> {
             right: 10.0,
             child: FloatingActionButton(
               onPressed: () {
-                // TODO: Geopostion bekommen
                 print('BTN for Geolocation pressed');
               },
               backgroundColor: Colors.white,
@@ -113,9 +131,6 @@ class _MapWidgetState extends State<MapWidget> {
               child: Icon(Icons.gps_fixed, color: appPrimaryColor),
             ),
           ),
-
-
-          // Search Bar and Login Button at the Bottom
           Positioned(
             bottom: 0.0,
             left: 0.0,
@@ -136,13 +151,16 @@ class _MapWidgetState extends State<MapWidget> {
               child: Column(
                 children: [
                   TextField(
+                    onSubmitted: (address) async {
+                      await searchAndMoveToAddress(address);
+                    },
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.location_on_outlined,
                         color: appSecondaryColor,
                       ),
                       border: OutlineInputBorder(),
-                      labelText: 'Adresse',
+                      labelText: 'Address',
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: appUnselectedIconColor,
@@ -160,7 +178,6 @@ class _MapWidgetState extends State<MapWidget> {
                     width: settingsBoxWidth,
                     child: ElevatedButton(
                       onPressed: () {
-                        // TODO: Noch speichern der Position hinzufügen
                         print('Location Speicher BTN gedrückt');
                       },
                       style: ElevatedButton.styleFrom(
@@ -168,7 +185,7 @@ class _MapWidgetState extends State<MapWidget> {
                         foregroundColor: btnFontColor,
                         backgroundColor: btnBackgroundColor,
                       ),
-                      child: const Text('Save Postion'),
+                      child: const Text('Save Position'),
                     ),
                   ),
                 ],
@@ -178,5 +195,30 @@ class _MapWidgetState extends State<MapWidget> {
         ],
       ),
     );
+  }
+
+  Future<void> searchAndMoveToAddress(String address) async {
+    LatLng newLocation = await searchForAddress(address);
+    setState(() {
+      markerPosition = newLocation;
+    });
+    mapController.move(newLocation, 17.5);
+  }
+
+  Future<LatLng> searchForAddress(String address) async {
+    final response = await http.get(
+      Uri.parse('https://nominatim.openstreetmap.org/search?q=$address&format=json&limit=1'),
+    );
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      if (data.isNotEmpty) {
+        double lat = double.parse(data[0]['lat']);
+        double lon = double.parse(data[0]['lon']);
+        return LatLng(lat, lon);
+      }
+    }
+
+    return lastPostion;
   }
 }
