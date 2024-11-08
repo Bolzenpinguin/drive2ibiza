@@ -1,6 +1,7 @@
 import 'package:drive2ibiza/utils/styleguide.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../widgets/or_divider_widget.dart';
 import '../navigation.dart';
 
 class Login extends StatelessWidget {
@@ -215,24 +216,6 @@ class LoginBTN extends StatelessWidget {
   }
 }
 
-// Or Divider
-class OrDivider extends StatelessWidget {
-  const OrDivider({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Row(
-      children: [
-        Expanded(child: Divider()),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: paddingSmall),
-          child: Text('Or'),
-        ),
-        Expanded(child: Divider(),)
-      ],
-    );
-  }
-}
 
 
 
