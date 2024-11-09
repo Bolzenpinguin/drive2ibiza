@@ -10,106 +10,111 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: paddingBig),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Title
-              const Text(
-                'Drive2Ibiza (Tba)',
-                style: TextStyle(
-                  fontSize: primaryHeading,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: spacingSmall),
-              // Subtitle
-              const Text(
-                'Sign In',
-                style: TextStyle(
-                  fontSize: secondaryHeading,
-                  color: appSecondaryColor,
-                ),
-              ),
-
-              // Spacer
-              const SizedBox(height: spacingBig),
-              // Email Field
-              const EmailField(),
-              // Spacer
-              const SizedBox(height: spacingNormal),
-              // Password Field
-              const PasswordField(),
-              // Forgot Password
-              const ForgotPasswordBTN(),
-              // Login BTN
-              const LoginBTN(),
-              // Spacer
-              const SizedBox(height: spacingNormal),
-              // Or Divider
-              const OrDivider(),
-              // Spacer
-              const SizedBox(height: spacingNormal),
-
-              // Social Login BTNs
-              // Apple
-              GestureDetector(
-                onTap: () {
-                  // TODO: Development function Login with Apple
-                  print('Apple button pressed');
-                },
-                child: SizedBox(
-                  width: double.infinity,
-                  height: spacingXL,
-                  child: SvgPicture.asset(
-                    'assets/btn/Continue_with_Apple.svg',
-                    fit: BoxFit.contain,
+        child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: paddingBig),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Title
+                  const Text(
+                    'Drive2Ibiza (Tba)',
+                    style: TextStyle(
+                      fontSize: primaryHeading,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ),
-
-              // Spacer
-              const SizedBox(height: spacingSmall),
-
-              // Google
-              GestureDetector(
-                onTap: () {
-                  // TODO: Development function Login with Google
-                  print('Google button pressed');
-                },
-                child: SizedBox(
-                  width: double.infinity,
-                  height: spacingXL,
-                  child: SvgPicture.asset(
-                    'assets/btn/Continue_with_Google.svg',
-                    fit: BoxFit.contain,
+                  const SizedBox(height: spacingSmall),
+                  // Subtitle
+                  const Text(
+                    'Sign In',
+                    style: TextStyle(
+                      fontSize: secondaryHeading,
+                      color: appSecondaryColor,
+                    ),
                   ),
-                ),
-              ),
 
-              // Spacer
-              const SizedBox(height: spacingSmall),
+                  // Spacer
+                  const SizedBox(height: spacingBig),
+                  // Email Field
+                  const EmailField(),
+                  // Spacer
+                  const SizedBox(height: spacingNormal),
+                  // Password Field
+                  const PasswordField(),
+                  // Forgot Password
+                  const ForgotPasswordBTN(),
+                  // Login BTN
+                  const LoginBTN(),
+                  // Spacer
+                  const SizedBox(height: spacingNormal),
+                  // Or Divider
+                  const OrDivider(),
+                  // Spacer
+                  const SizedBox(height: spacingNormal),
 
-              // Mail
-              GestureDetector(
-                onTap: () {
-                  // TODO: Development function Login with Mail
-                  print('Mail button pressed');
-                },
-                child: SizedBox(
-                  width: double.infinity,
-                  height: spacingXL,
-                  child: SvgPicture.asset(
-                    'assets/btn/SignInWithMail.svg',
-                    fit: BoxFit.contain,
+                  // Social Login BTNs
+                  // Apple
+                  GestureDetector(
+                    onTap: () {
+                      // TODO: Development function Login with Apple
+                      print('Apple button pressed');
+                    },
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: spacingXL,
+                      child: SvgPicture.asset(
+                        'assets/btn/Continue_with_Apple.svg',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   ),
-                ),
-              ),
 
-            ],
-        ),)
+                  // Spacer
+                  const SizedBox(height: spacingSmall),
+
+                  // Google
+                  GestureDetector(
+                    onTap: () {
+                      // TODO: Development function Login with Google
+                      print('Google button pressed');
+                    },
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: spacingXL,
+                      child: SvgPicture.asset(
+                        'assets/btn/Continue_with_Google.svg',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+
+                  // Spacer
+                  const SizedBox(height: spacingSmall),
+
+                  // Mail
+                  GestureDetector(
+                    onTap: () {
+                      // TODO: Development function Login with Mail
+                      print('Mail button pressed');
+                    },
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: spacingXL,
+                      child: SvgPicture.asset(
+                        'assets/btn/SignInWithMail.svg',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            )
+        )
+
       ),
     );
   }
