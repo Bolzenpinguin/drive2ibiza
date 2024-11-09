@@ -1,8 +1,4 @@
-  import 'package:flutter/material.dart';
-  import 'package:drive2ibiza/utils/styleguide.dart';
-  import 'package:flutter_map/flutter_map.dart';
-  import 'package:latlong2/latlong.dart';
-
+import 'package:flutter/material.dart';
 import 'map_widget.dart';
 
   class MapPage extends StatelessWidget {
