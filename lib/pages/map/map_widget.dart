@@ -64,7 +64,7 @@ class _MapWidgetState extends State<MapWidget> {
                       Marker(
                         point: markerPosition!,
                         width: 80.0,
-                        height: 200.0,
+                        height: 100.0,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
