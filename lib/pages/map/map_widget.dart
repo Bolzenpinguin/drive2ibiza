@@ -26,21 +26,6 @@ class _MapWidgetState extends State<MapWidget> {
     markerPosition = lastPosition; // Initially set marker at the lastPosition
   }
 
-  Future<void> goToUserLocation() async {
-    print("Attempting to get user location...");
-    LatLng? userLocation = await geolocationService.getUserLocation();
-
-    if (userLocation != null) {
-      setState(() {
-        markerPosition = userLocation;
-      });
-      mapController.move(userLocation, 17.5);
-      print("User location updated: ${userLocation.latitude}, ${userLocation.longitude}");
-    } else {
-      print('Failed to get user location');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -139,9 +124,17 @@ class _MapWidgetState extends State<MapWidget> {
             top: 60.0,
             right: 10.0,
             child: FloatingActionButton(
-              onPressed: () {
-                goToUserLocation;
-                print('Geo BTN Pressed');
+              onPressed: () async {
+                // Fetch the user location
+                LatLng? userLocation = await geolocationService.getUserLocation();
+
+                if (userLocation != null) {
+                  // Update marker position and move the map to the users location
+                  setState(() {
+                    markerPosition = userLocation;
+                  });
+                  mapController.move(userLocation, 17.5);
+                }
               },
               backgroundColor: Colors.white,
               mini: true,
