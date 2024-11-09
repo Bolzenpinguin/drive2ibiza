@@ -5,6 +5,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:drive2ibiza/services/geolocation.dart';
 
 class MapWidget extends StatefulWidget {
   const MapWidget({super.key});
@@ -15,13 +16,29 @@ class MapWidget extends StatefulWidget {
 
 class _MapWidgetState extends State<MapWidget> {
   final MapController mapController = MapController();
-  final LatLng lastPostion = LatLng(51.050407, 13.737262);
+  final LatLng lastPosition = LatLng(51.050407, 13.737262);
   LatLng? markerPosition;
+  final GeolocationService geolocationService = GeolocationService();
 
   @override
   void initState() {
     super.initState();
-    markerPosition = lastPostion; // Initially set marker at the lastPosition
+    markerPosition = lastPosition; // Initially set marker at the lastPosition
+  }
+
+  Future<void> goToUserLocation() async {
+    print("Attempting to get user location...");
+    LatLng? userLocation = await geolocationService.getUserLocation();
+
+    if (userLocation != null) {
+      setState(() {
+        markerPosition = userLocation;
+      });
+      mapController.move(userLocation, 17.5);
+      print("User location updated: ${userLocation.latitude}, ${userLocation.longitude}");
+    } else {
+      print('Failed to get user location');
+    }
   }
 
   @override
@@ -45,7 +62,7 @@ class _MapWidgetState extends State<MapWidget> {
             child: FlutterMap(
               mapController: mapController,
               options: MapOptions(
-                initialCenter: lastPostion,
+                initialCenter: lastPosition,
                 initialZoom: 17.5,
                 onTap: (tapPosition, point) {
                   // Update marker position to where the map was tapped
@@ -72,7 +89,6 @@ class _MapWidgetState extends State<MapWidget> {
                               width: 50.0,
                               height: 50.0,
                               decoration: BoxDecoration(
-                                // TODO Farbe von User als Marker setzten
                                 color: Colors.red,
                                 shape: BoxShape.circle,
                               ),
@@ -88,7 +104,6 @@ class _MapWidgetState extends State<MapWidget> {
                               width: 10.0,
                               height: 10.0,
                               decoration: BoxDecoration(
-                                // TODO Farbe von User als Marker setzten
                                 color: Colors.red,
                                 shape: BoxShape.circle,
                               ),
@@ -106,11 +121,10 @@ class _MapWidgetState extends State<MapWidget> {
             right: 10.0,
             child: FloatingActionButton(
               onPressed: () {
-                // Reset marker and map to the lastPosition
                 setState(() {
-                  markerPosition = lastPostion;
+                  markerPosition = lastPosition;
                 });
-                mapController.move(lastPostion, 17.5);
+                mapController.move(lastPosition, 17.5);
               },
               backgroundColor: Colors.white,
               mini: true,
@@ -126,8 +140,8 @@ class _MapWidgetState extends State<MapWidget> {
             right: 10.0,
             child: FloatingActionButton(
               onPressed: () {
-                // TODO Gelocation noch entwickeln
-                print('BTN for Geolocation pressed');
+                goToUserLocation;
+                print('Geo BTN Pressed');
               },
               backgroundColor: Colors.white,
               mini: true,
@@ -181,8 +195,7 @@ class _MapWidgetState extends State<MapWidget> {
                     width: settingsBoxWidth,
                     child: ElevatedButton(
                       onPressed: () {
-                        // TODO Speicherung der Location noch entwickeln
-                        print('Location Speicher BTN gedrückt');
+                        print('Location Save BTN pressed');
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: paddingNormal),
@@ -222,7 +235,6 @@ class _MapWidgetState extends State<MapWidget> {
         return LatLng(lat, lon);
       }
     }
-    // Fallback to the last postion
-    return lastPostion;
+    return lastPosition; // Fallback to the lastPosition
   }
 }
