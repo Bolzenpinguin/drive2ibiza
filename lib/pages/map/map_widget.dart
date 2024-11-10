@@ -162,7 +162,7 @@ class _MapWidgetState extends State<MapWidget> {
                 children: [
                   TextField(
                     onSubmitted: (address) async {
-                      await searchAndMoveToAddress(address);
+                      await _searchAndMoveToAddress(address);
                     },
                     decoration: InputDecoration(
                       prefixIcon: Icon(
@@ -220,7 +220,7 @@ class _MapWidgetState extends State<MapWidget> {
           actionsAlignment: MainAxisAlignment.center, // Center-aligning the actions
           actions: <Widget>[
             TextButton(
-              child: const Text('Okay!', style: TextStyle(color: appPrimaryColor),),
+              child: const Text('Okay!'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -231,15 +231,15 @@ class _MapWidgetState extends State<MapWidget> {
     );
   }
 
-  Future<void> searchAndMoveToAddress(String address) async {
-    LatLng newLocation = await searchForAddress(address);
+  Future<void> _searchAndMoveToAddress(String address) async {
+    LatLng newLocation = await _searchForAddress(address);
     setState(() {
       markerPosition = newLocation;
     });
     mapController.move(newLocation, 17.5);
   }
 
-  Future<LatLng> searchForAddress(String address) async {
+  Future<LatLng> _searchForAddress(String address) async {
     final response = await http.get(
       Uri.parse('https://nominatim.openstreetmap.org/search?q=$address&format=json&limit=1'),
     );
