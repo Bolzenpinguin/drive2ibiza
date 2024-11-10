@@ -188,7 +188,8 @@ class _MapWidgetState extends State<MapWidget> {
                     width: settingsBoxWidth,
                     child: ElevatedButton(
                       onPressed: () {
-                        _showMyDialog();
+                        // TODO Abfrage hinbekommen, ob speichern der Location erfolgreich gewesen ist
+                        _showMyDialog(false);
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: paddingNormal),
@@ -208,16 +209,21 @@ class _MapWidgetState extends State<MapWidget> {
   }
 
 
-  Future<void> _showMyDialog() async {
+  Future<void> _showMyDialog(bool success) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Center(
-            child: Text('Saved Position!'), // Centering the title text
+          title: Center(
+            child: Text(
+              success ? 'Saved Position!' : 'Could not save Position!',
+            ),
           ),
-          actionsAlignment: MainAxisAlignment.center, // Center-aligning the actions
+          content: !success
+              ? const Text('Please try again.')
+              : null,
+          actionsAlignment: MainAxisAlignment.center,
           actions: <Widget>[
             TextButton(
               child: const Text('Okay!'),
