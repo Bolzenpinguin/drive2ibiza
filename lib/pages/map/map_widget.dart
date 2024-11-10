@@ -74,6 +74,7 @@ class _MapWidgetState extends State<MapWidget> {
                               width: 50.0,
                               height: 50.0,
                               decoration: BoxDecoration(
+                                // TODO Farbe vom User hier einfügen
                                 color: Colors.red,
                                 shape: BoxShape.circle,
                               ),
@@ -89,6 +90,7 @@ class _MapWidgetState extends State<MapWidget> {
                               width: 10.0,
                               height: 10.0,
                               decoration: BoxDecoration(
+                                // TODO Farbe vom User hier einfügen 
                                 color: Colors.red,
                                 shape: BoxShape.circle,
                               ),
