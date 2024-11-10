@@ -188,7 +188,7 @@ class _MapWidgetState extends State<MapWidget> {
                     width: settingsBoxWidth,
                     child: ElevatedButton(
                       onPressed: () {
-                        print('Location Save BTN pressed');
+                        _showMyDialog();
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: paddingNormal),
@@ -204,6 +204,30 @@ class _MapWidgetState extends State<MapWidget> {
           ),
         ],
       ),
+    );
+  }
+
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Center(
+            child: Text('Saved Position!'), // Centering the title text
+          ),
+          actionsAlignment: MainAxisAlignment.center, // Center-aligning the actions
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Okay!', style: TextStyle(color: appPrimaryColor),),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
