@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'styleguide.dart';
 
-
-
-
 class AppTheme {
   // light Theme
   static ThemeData lightTheme = ThemeData(
@@ -65,6 +62,21 @@ class AppTheme {
         fontWeight: FontWeight.normal,
       ), // Default text color
     ),
+
+
+    // Overlay Alert
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: WidgetStateProperty.all(appPrimaryColor), // Sets the text color
+        textStyle: WidgetStateProperty.all(
+          TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    ),
+
 
 
     inputDecorationTheme: InputDecorationTheme(

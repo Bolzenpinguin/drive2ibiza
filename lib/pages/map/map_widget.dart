@@ -74,6 +74,7 @@ class _MapWidgetState extends State<MapWidget> {
                               width: 50.0,
                               height: 50.0,
                               decoration: BoxDecoration(
+                                // TODO Farbe vom User hier einfügen
                                 color: Colors.red,
                                 shape: BoxShape.circle,
                               ),
@@ -89,6 +90,7 @@ class _MapWidgetState extends State<MapWidget> {
                               width: 10.0,
                               height: 10.0,
                               decoration: BoxDecoration(
+                                // TODO Farbe vom User hier einfügen
                                 color: Colors.red,
                                 shape: BoxShape.circle,
                               ),
@@ -162,7 +164,7 @@ class _MapWidgetState extends State<MapWidget> {
                 children: [
                   TextField(
                     onSubmitted: (address) async {
-                      await searchAndMoveToAddress(address);
+                      await _searchAndMoveToAddress(address);
                     },
                     decoration: InputDecoration(
                       prefixIcon: Icon(
@@ -188,7 +190,8 @@ class _MapWidgetState extends State<MapWidget> {
                     width: settingsBoxWidth,
                     child: ElevatedButton(
                       onPressed: () {
-                        print('Location Save BTN pressed');
+                        // TODO Abfrage hinbekommen, ob speichern der Location erfolgreich gewesen ist
+                        _showMyDialog(false);
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: paddingNormal),
@@ -207,15 +210,44 @@ class _MapWidgetState extends State<MapWidget> {
     );
   }
 
-  Future<void> searchAndMoveToAddress(String address) async {
-    LatLng newLocation = await searchForAddress(address);
+
+  Future<void> _showMyDialog(bool success) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(
+            child: Text(
+              success ? 'Saved Position!' : 'Could not save Position!',
+            ),
+          ),
+          content: !success
+              ? const Text('Please try again.')
+              : null,
+          actionsAlignment: MainAxisAlignment.center,
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Okay!'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _searchAndMoveToAddress(String address) async {
+    LatLng newLocation = await _searchForAddress(address);
     setState(() {
       markerPosition = newLocation;
     });
     mapController.move(newLocation, 17.5);
   }
 
-  Future<LatLng> searchForAddress(String address) async {
+  Future<LatLng> _searchForAddress(String address) async {
     final response = await http.get(
       Uri.parse('https://nominatim.openstreetmap.org/search?q=$address&format=json&limit=1'),
     );
