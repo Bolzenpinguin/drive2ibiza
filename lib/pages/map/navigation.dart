@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'calendar/calendar.dart';
-import 'map/map.dart';
-import 'settings/settings.dart';
+import '../calendar/calendar.dart';
+import 'map.dart';
+import '../settings/settings.dart';
 
 class Navigation extends StatefulWidget {
   final int currentIndex;

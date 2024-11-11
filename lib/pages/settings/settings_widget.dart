@@ -1,8 +1,8 @@
+import 'package:drive2ibiza/pages/settings/color_settings.dart';
 import 'package:flutter/material.dart';
 import '../../utils/styleguide.dart';
 import 'package:intl/intl.dart';
 import '../../widgets/spacer_widget.dart';
-
 import 'group_settings.dart';
 
 class SettingsWidget extends StatelessWidget {
@@ -28,14 +28,13 @@ class SettingsWidget extends StatelessWidget {
               ],
             ),
             child: Column(
-              mainAxisSize: MainAxisSize.min, // This keeps the container only as tall as its content
+              mainAxisSize: MainAxisSize.min,
               children: [
-                // Add your rows and content here
+                // TODO Variable für Namen einbauen
                 Text('Hallo Kurt!', style: TextStyle(fontSize: 24)),
 
                 // Spacer
-                SizedBox(height: spacingSmall,
-                ),
+                SizedBox(height: spacingSmall,),
 
                 // Driver Name Row
                 Row(
@@ -55,12 +54,6 @@ class SettingsWidget extends StatelessWidget {
                             onTap: () {
                               // TODO: BTN für Namensänderung implementieren
                               print('Button for Name Change Pressed!');
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const GroupSettings(),
-                                ),
-                              );
                             },
                             child: Text(
                               'Kurt',
@@ -96,6 +89,12 @@ class SettingsWidget extends StatelessWidget {
                               onTap: () {
                                 // TODO: BTN für Farbauswahl implementieren
                                 print('Button for Color Change Pressed!');
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const ColorSettings(),
+                                  ),
+                                );
                               },
                               child: Container(
                                 width: 24,
@@ -137,6 +136,12 @@ class SettingsWidget extends StatelessWidget {
                             onTap: () {
                               // TODO: BTN für Namensänderung implementieren
                               print('Button for Group Change Pressed!');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const GroupSettings(),
+                                ),
+                              );
                             },
                             child: Text(
                               '-',

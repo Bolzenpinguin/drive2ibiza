@@ -1,6 +1,6 @@
 import 'package:drive2ibiza/utils/theme.dart';
 import 'package:flutter/material.dart';
-import 'pages/navigation.dart';
+import 'pages/map/navigation.dart';
 import 'pages/login/login.dart';
 
 // Placeholder for login
