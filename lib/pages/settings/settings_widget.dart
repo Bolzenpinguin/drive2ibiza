@@ -87,8 +87,6 @@ class SettingsWidget extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                // TODO: BTN für Farbauswahl implementieren
-                                print('Button for Color Change Pressed!');
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
