@@ -1,9 +1,10 @@
-import 'package:drive2ibiza/pages/settings/color_settings.dart';
+import 'package:drive2ibiza/pages/settings/settings_color.dart';
+import 'package:drive2ibiza/pages/settings/settings_name.dart';
 import 'package:flutter/material.dart';
 import '../../utils/styleguide.dart';
 import 'package:intl/intl.dart';
 import '../../widgets/spacer_widget.dart';
-import 'group_settings.dart';
+import 'settings_group.dart';
 
 class SettingsWidget extends StatelessWidget {
   const SettingsWidget({super.key});
@@ -52,8 +53,12 @@ class SettingsWidget extends StatelessWidget {
                         child: Center(
                           child: GestureDetector(
                             onTap: () {
-                              // TODO: BTN für Namensänderung implementieren
-                              print('Button for Name Change Pressed!');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const NameSettings(),
+                                ),
+                              );
                             },
                             child: Text(
                               'Kurt',
