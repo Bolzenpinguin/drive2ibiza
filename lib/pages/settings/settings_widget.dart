@@ -5,9 +5,37 @@ import '../../utils/styleguide.dart';
 import 'package:intl/intl.dart';
 import '../../widgets/spacer_widget.dart';
 import 'settings_group.dart';
+import 'package:drive2ibiza/utils/user_prefs.dart';
 
-class SettingsWidget extends StatelessWidget {
+class SettingsWidget extends StatefulWidget {
   const SettingsWidget({super.key});
+
+  @override
+  _SettingsWidgetState createState() => _SettingsWidgetState();
+}
+
+class _SettingsWidgetState extends State<SettingsWidget> {
+  Color userColor = appPrimaryColor; // Default color
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserColor();
+  }
+
+  Future<void> _loadUserColor() async {
+    Color? color = await UserPrefs.getUserColor();
+    if (color != null) {
+      setState(() {
+        userColor = color;
+      });
+    }
+  }
+
+  Future<void> _refreshUserName() async {
+    setState(() {
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +59,21 @@ class SettingsWidget extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // TODO Variable für Namen einbauen
-                Text('Hallo Kurt!', style: TextStyle(fontSize: 24)),
+                FutureBuilder<String?>(
+                  future: UserPrefs.getUserName(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    }
+                    if (snapshot.hasError) {
+                      return Text("Error loading name", style: TextStyle(fontSize: 24));
+                    }
+                    if (!snapshot.hasData || snapshot.data == null) {
+                      return Text("Hello!", style: TextStyle(fontSize: 24));
+                    }
+                    return Text('Hello ${snapshot.data}!', style: TextStyle(fontSize: 24));
+                  },
+                ),
 
                 // Spacer
                 SizedBox(height: spacingSmall,),
@@ -52,17 +93,31 @@ class SettingsWidget extends StatelessWidget {
                         ),
                         child: Center(
                           child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
+                            onTap: () async {
+                              bool? result = await Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => const NameSettings(),
                                 ),
                               );
+                              if (result == true) {
+                                _refreshUserName();
+                              }
                             },
-                            child: Text(
-                              'Kurt',
-                              style: TextStyle(color: linkFontColor),
+                            child: FutureBuilder<String?>(
+                              future: UserPrefs.getUserName(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return CircularProgressIndicator();
+                                }
+                                if (snapshot.hasError) {
+                                  return Text("Error loading Name", style: TextStyle(color: linkFontColor));
+                                }
+                                if (!snapshot.hasData || snapshot.data == null) {
+                                  return Text("-", style: TextStyle(color: linkFontColor));
+                                }
+                                return Text('${snapshot.data}', style: TextStyle(color: linkFontColor));
+                              },
                             ),
                           ),
                         ),
@@ -91,20 +146,23 @@ class SettingsWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             GestureDetector(
-                              onTap: () {
-                                Navigator.push(
+                              onTap: () async {
+                                bool? result = await Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const ColorSettings(),
                                   ),
                                 );
+                                if (result == true) {
+                                  _loadUserColor();
+                                }
                               },
                               child: Container(
                                 width: 24,
                                 height: 24,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Colors.red,
+                                  color: userColor,
                                   border: Border.all(
                                     color: appPrimaryColor,
                                   ),
@@ -137,7 +195,6 @@ class SettingsWidget extends StatelessWidget {
                         child: Center(
                           child: GestureDetector(
                             onTap: () {
-                              // TODO: BTN für Namensänderung implementieren
                               print('Button for Group Change Pressed!');
                               Navigator.push(
                                 context,
@@ -162,11 +219,9 @@ class SettingsWidget extends StatelessWidget {
 
                 ElevatedButton(
                   onPressed: () {
-                    // TODO Abspeichern hinzufügen -> Brauch ich das eigentlich??
                     print('Save Settings BTN pressed');
                   },
                   style: ElevatedButton.styleFrom(
-                    //padding: const EdgeInsets.symmetric(vertical: paddingNormal),
                     foregroundColor: btnFontColor,
                     backgroundColor: btnBackgroundColor,
                   ),
@@ -176,7 +231,6 @@ class SettingsWidget extends StatelessWidget {
             ),
           ),
         ),
-
 
         // Copyright Text
         Padding(
