@@ -1,4 +1,5 @@
 import 'package:drive2ibiza/utils/styleguide.dart';
+import 'package:drive2ibiza/utils/user_prefs.dart';
 import 'package:flutter/material.dart';
 
 class ColorSettings extends StatefulWidget {
@@ -9,8 +10,30 @@ class ColorSettings extends StatefulWidget {
 }
 
 class _ColorSettingsState extends State<ColorSettings> {
-  // TODO Default color noch laden
-  Color selectedColor = Colors.black; // Default selected color
+  Color selectedColor = appPrimaryColor; // Default color
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserColor();
+  }
+
+  Future<void> _loadUserColor() async {
+    Color? savedColor = await UserPrefs.getUserColor();
+    if (savedColor != null) {
+      setState(() {
+        selectedColor = savedColor;
+      });
+    }
+  }
+
+  Future<void> _saveColor() async {
+    await UserPrefs.saveUserColor(selectedColor);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Color saved successfully')),
+    );
+    Navigator.pop(context, true);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,43 +66,35 @@ class _ColorSettingsState extends State<ColorSettings> {
                     'Please select a new color',
                     style: TextStyle(fontSize: 24),
                   ),
-
                   const SizedBox(height: 20),
-
                   const Text(
                     'Colors',
                     style: TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 10),
-
                   Wrap(
                     spacing: 30,
                     children: [
-                      _buildColorCircle(Colors.black),
-                      _buildColorCircle(Colors.blue),
-                      _buildColorCircle(Colors.green),
-                      _buildColorCircle(Colors.yellow),
-                      _buildColorCircle(Colors.purple),
-                      _buildColorCircle(Colors.lightBlue),
-                      _buildColorCircle(Colors.red),
-                      _buildColorCircle(Colors.deepPurple),
-                      _buildColorCircle(Colors.brown),
-                      _buildColorCircle(Colors.lightBlueAccent)
+                      _buildColorCircle(Color.fromRGBO(158, 1, 6, 1)),
+                      _buildColorCircle(Color.fromRGBO(213, 62, 79, 1)),
+                      _buildColorCircle(Color.fromRGBO(244, 109, 67, 1)),
+                      _buildColorCircle(Color.fromRGBO(253, 174, 97, 1)),
+                      _buildColorCircle(Color.fromRGBO(161, 133, 61, 1.0)),
+                      _buildColorCircle(Color.fromRGBO(122, 147, 0, 1.0)),
+                      _buildColorCircle(Color.fromRGBO(143, 0, 162, 1.0)),
+                      _buildColorCircle(Color.fromRGBO(102, 194, 165, 1)),
+                      _buildColorCircle(Color.fromRGBO(50, 136, 189, 1)),
+                      _buildColorCircle(Color.fromRGBO(94, 79, 162, 1)),
                     ],
                   ),
-
                   const SizedBox(height: 20),
-
                   ElevatedButton(
-                    onPressed: () {
-                      // TODO Abspeichern hinzufügen
-                      print('Save New Color BTN pressed');
-                    },
+                    onPressed: _saveColor,
                     style: ElevatedButton.styleFrom(
                       foregroundColor: btnFontColor,
                       backgroundColor: btnBackgroundColor,
                     ),
-                    child: Text('Save new color'),
+                    child: const Text('Save new color'),
                   ),
                 ],
               ),
@@ -104,9 +119,8 @@ class _ColorSettingsState extends State<ColorSettings> {
           color: selectedColor == color ? color : Colors.transparent,
         ),
         child: Container(
-          // Inner White Border Circle
           padding: const EdgeInsets.all(3.0),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.white,
           ),

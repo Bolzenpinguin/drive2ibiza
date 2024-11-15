@@ -7,6 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:drive2ibiza/services/geolocation.dart';
 
+import '../../utils/user_prefs.dart';
+
 class MapWidget extends StatefulWidget {
   const MapWidget({super.key});
 
@@ -19,11 +21,22 @@ class _MapWidgetState extends State<MapWidget> {
   final LatLng lastPosition = LatLng(51.050407, 13.737262);
   LatLng? markerPosition;
   final GeolocationService geolocationService = GeolocationService();
+  Color userColor = appPrimaryColor; // Default color
 
   @override
   void initState() {
     super.initState();
     markerPosition = lastPosition; // Initially set marker at the lastPosition
+    _loadUserColor();
+  }
+
+  Future<void> _loadUserColor() async {
+    Color? color = await UserPrefs.getUserColor();
+    if (color != null) {
+      setState(() {
+        userColor = color;
+      });
+    }
   }
 
   @override
@@ -74,8 +87,7 @@ class _MapWidgetState extends State<MapWidget> {
                               width: 50.0,
                               height: 50.0,
                               decoration: BoxDecoration(
-                                // TODO Farbe vom User hier einfügen
-                                color: Colors.red,
+                                color: userColor,
                                 shape: BoxShape.circle,
                               ),
                               child: Center(
@@ -90,8 +102,7 @@ class _MapWidgetState extends State<MapWidget> {
                               width: 10.0,
                               height: 10.0,
                               decoration: BoxDecoration(
-                                // TODO Farbe vom User hier einfügen
-                                color: Colors.red,
+                                color: userColor,
                                 shape: BoxShape.circle,
                               ),
                             ),
