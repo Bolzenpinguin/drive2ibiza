@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../utils/styleguide.dart';
 
 class GroupSettings extends StatelessWidget {
@@ -8,7 +9,22 @@ class GroupSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create or Join a Group'),
+        title: const Text('Group'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.share), // Icon für das Teilen
+            onPressed: () {
+              // TODO: Gruppennamen in Sharing Einarbeiten
+              Share.share('Check out this group: GroupName123');
+            },
+          ),
+        ],
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

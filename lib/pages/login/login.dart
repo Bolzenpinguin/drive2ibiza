@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../widgets/or_divider_widget.dart';
 import '../map/navigation.dart';
+import 'login_mail.dart';
+import 'login_password.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -97,8 +99,10 @@ class Login extends StatelessWidget {
                   // Mail
                   GestureDetector(
                     onTap: () {
-                      // TODO: Development function Login with Mail
-                      print('Mail button pressed');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CreatAccountEmail()),
+                      );
                     },
                     child: SizedBox(
                       width: double.infinity,
@@ -133,6 +137,7 @@ class EmailField extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadiusMedium),
         ),
       ),
+      keyboardType: TextInputType.emailAddress,
     );
   }
 }
@@ -183,7 +188,10 @@ class ForgotPasswordBTN extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: TextButton(
           onPressed: () {
-            // TODO: Passwort vergessen Funktion
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ForgotPassword()),
+            );
           },
           child: const Text(
             'Forgot Password?',
@@ -204,7 +212,7 @@ class LoginBTN extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          //TODO: Login Funktion -> leitet zu Kalender Page weiter
+          //TODO: Login Funktion -> leitet zu Kalender Page weiter ohne überprüfung
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const Navigation(currentIndex: 0,)),
