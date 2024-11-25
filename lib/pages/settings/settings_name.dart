@@ -43,6 +43,12 @@ class _NameSettingsState extends State<NameSettings> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Change your Name'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

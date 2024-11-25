@@ -195,7 +195,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         child: Center(
                           child: GestureDetector(
                             onTap: () {
-                              print('Button for Group Change Pressed!');
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -212,20 +211,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       ),
                     ),
                   ],
-                ),
-
-                // Spacer
-                SpacerWidget(),
-
-                ElevatedButton(
-                  onPressed: () {
-                    print('Save Settings BTN pressed');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: btnFontColor,
-                    backgroundColor: btnBackgroundColor,
-                  ),
-                  child: Text('Save Settings'),
                 ),
               ],
             ),
