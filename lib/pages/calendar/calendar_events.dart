@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../utils/styleguide.dart';
 import '../../utils/theme.dart';
 
 class CalendarEvents extends StatefulWidget {
@@ -9,11 +10,11 @@ class CalendarEvents extends StatefulWidget {
 }
 
 class _CalendarEventsState extends State<CalendarEvents> {
-  bool isWholeDay = false; // State variable for Whole Day toggle
-  DateTime selectedStartDate = DateTime.now(); // State for Start Date
-  TimeOfDay selectedStartTime = TimeOfDay(hour: 9, minute: 30); // State for Start Time
-  DateTime selectedEndDate = DateTime.now(); // State for End Date
-  TimeOfDay selectedEndTime = TimeOfDay(hour: 14, minute: 0); // State for End Time
+  bool isWholeDay = false;
+  DateTime selectedStartDate = DateTime.now();
+  TimeOfDay selectedStartTime = TimeOfDay(hour: 9, minute: 30);
+  DateTime selectedEndDate = DateTime.now();
+  TimeOfDay selectedEndTime = TimeOfDay(hour: 14, minute: 0);
 
   // Function to pick a date
   Future<void> _selectDate(BuildContext context, bool bool) async {
@@ -24,7 +25,7 @@ class _CalendarEventsState extends State<CalendarEvents> {
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
       builder: (BuildContext context, Widget? child) {
-        // Call the static method here
+
         return AppTheme.datePickerTheme(context, child);
       },
     );
@@ -144,7 +145,7 @@ class _CalendarEventsState extends State<CalendarEvents> {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                                 decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
+                                  color: appBackgroundColor,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
@@ -159,16 +160,13 @@ class _CalendarEventsState extends State<CalendarEvents> {
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                                 decoration: BoxDecoration(
-                                  color: isWholeDay
-                                      ? Colors.grey.shade300
-                                      : Colors.grey.shade200,
-                                  borderRadius: BorderRadius.circular(8),
+                                  color: appBackgroundColor,
+                                  borderRadius: BorderRadius.circular(borderRadiusMedium),
                                 ),
                                 child: Text(
                                   isWholeDay
                                       ? '--:--'
                                       : selectedEndTime.format(context),
-                                  style: const TextStyle(fontSize: 14),
                                 ),
                               ),
                             ),
@@ -187,15 +185,15 @@ class _CalendarEventsState extends State<CalendarEvents> {
                           value: isWholeDay,
                           onChanged: (bool value) {
                             setState(() {
-                              isWholeDay = value; // Update the toggle state
+                              isWholeDay = value;
                             });
                           },
-                          activeColor: Colors.blue,
-                          inactiveThumbColor: Colors.grey,
+                          activeColor: btnBackgroundColor,
+                          inactiveThumbColor: secondaryFontColor,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: spacingNormal),
 
                     // Description Input
                     TextField(
@@ -203,23 +201,22 @@ class _CalendarEventsState extends State<CalendarEvents> {
                         labelText: 'Description',
                         hintText: 'Enter details here',
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(borderRadiusSmall),
                         ),
                       ),
                       maxLines: 3,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: spacingNormal),
 
                     // Save Button
                     ElevatedButton(
                       onPressed: () {
-                        print("Start: ${selectedStartDate.toLocal()} ${selectedStartTime.format(context)}");
-                        print("End: ${selectedEndDate.toLocal()} ${selectedEndTime.format(context)}");
-                        print("Whole Day: $isWholeDay");
+
+                        // TODO
                       },
                       style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.blue,
+                        foregroundColor: btnFontColor,
+                        backgroundColor: btnBackgroundColor,
                       ),
                       child: const Text('Save Reservation'),
                     ),
